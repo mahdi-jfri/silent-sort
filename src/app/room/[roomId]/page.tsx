@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState, useRef, Usable, use} from 'react';
+import React, {useEffect, useState, useRef, use} from 'react';
 import {Container, Grid, Paper, Typography, Box, CircularProgress, Chip, Snackbar, Alert} from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ShareIcon from '@mui/icons-material/Share';
@@ -34,19 +34,13 @@ interface PersonalData {
     cards: CardType[];
 }
 
-interface RoomPageProps {
-    params: Usable<{
-        roomId: string;
-    }>;
-}
-
 interface SnackbarData {
     open: boolean;
     message: string;
     severity: AlertColor;
 }
 
-export default function RoomPage({params}: RoomPageProps) {
+export default function RoomPage({params}: {params: Promise<never>}) {
     const {roomId} = use(params);
     const [name, setName] = useState<string>();
 
@@ -68,7 +62,7 @@ export default function RoomPage({params}: RoomPageProps) {
         const localStorageName = localStorage.getItem('silentSortPlayerName') || generateTechName();
         setName(localStorageName);
 
-        const wsUrl = `ws://localhost:8001/?room_id=${roomId}&name=${localStorageName}`;
+        const wsUrl = `${process.env.NEXT_PUBLIC_BACKEND_WS_URL}/?room_id=${roomId}&name=${localStorageName}`;
         ws.current = new WebSocket(wsUrl);
         setIsLoading(true);
 
