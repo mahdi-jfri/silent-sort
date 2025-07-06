@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Silent Sort <img src="https://raw.githubusercontent.com/mahdi-jfri/silent-sort/refs/heads/master/public/icon.png" width="30" alt="silent-sort icon">
 
-## Getting Started
+**Silent Sort** is a real-time, collaborative card sorting game built with Next.js and WebSockets. The challenge is for players to work together to sort a deck of cards into categories without any communication, discovering the hidden sorting rule through action and observation alone.
 
-First, run the development server:
+**Play Now:** [https://mahdi-jfri.github.io/silent-sort/](https://mahdi-jfri.github.io/silent-sort/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Screenshot of the Silent Sort game in action](https://raw.githubusercontent.com/mahdi-jfri/silent-sort/refs/heads/master/public/game-screenshot.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ## Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Real-Time Collaboration:** Uses WebSockets for instant updates as players move cards.
+* **Dynamic Rooms:** Players can create unique game rooms and share the link to invite others.
+* **Client-Side Rendering:** A smooth, single-page application experience built with the Next.js Pages Router.
+* **Responsive Design:** Fully playable on both desktop and mobile devices.
 
-## Learn More
+### ## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+* **Frontend:** Next.js, React, TypeScript, Tailwind CSS
+* **Backend:** Golang ([Repo](https://github.com/mahdi-jfri/silent-sort-backend/))
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
