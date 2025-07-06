@@ -1,7 +1,5 @@
-"use client";
-
 import React, {useState, useEffect} from 'react';
-import {useRouter} from 'next/navigation';
+import {useRouter} from 'next/router';
 import {
     Container,
     Box,
@@ -14,6 +12,7 @@ import {
 import {Play, LogIn} from 'lucide-react';
 import Image from 'next/image'
 import Layout from "@/components/Layout";
+import Head from "next/head";
 
 export default function HomePage() {
     const [roomId, setRoomId] = useState<string>('');
@@ -54,12 +53,15 @@ export default function HomePage() {
 
     return (
         <Layout>
+            <Head>
+                <title>Silent Sort</title>
+            </Head>
             <main className="min-h-screen flex items-center justify-center p-4">
                 <Container maxWidth="sm">
                     <Paper elevation={6}
                            className="p-8 rounded-2xl bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-center">
                         <Box className="flex justify-center items-center gap-3 mb-4">
-                            <Image src="/icon.png" width={50} height={0} alt="Silent sort game icon"/>
+                            <Image src={`${router.basePath}/icon.png`} width={50} height={0} alt="Silent sort game icon"/>
                             <Typography variant="h3" component="h1"
                                         className="font-bold text-slate-800 dark:text-slate-100">
                                 Silent Sort

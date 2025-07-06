@@ -1,6 +1,4 @@
-"use client";
-
-import React, {useEffect, useState, useRef, use} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {Container, Grid, Paper, Typography, Box, CircularProgress, Chip, Snackbar, Alert} from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ShareIcon from '@mui/icons-material/Share';
@@ -14,6 +12,8 @@ import {AlertType, GameState, Player, CardType} from "@/types";
 import Layout from "@/components/Layout";
 import {AlertColor} from "@mui/material/Alert";
 import Image from "next/image";
+import {useRouter} from "next/router";
+import Head from "next/head";
 
 interface Notification {
     show: boolean;
@@ -40,8 +40,9 @@ interface SnackbarData {
     severity: AlertColor;
 }
 
-export default function RoomPage({params}: {params: Promise<never>}) {
-    const {roomId} = use(params);
+export default function RoomPage() {
+    const router = useRouter();
+    const roomId = router.query.roomId;
     const [name, setName] = useState<string>();
 
     const [gameData, setGameData] = useState<GameData | null>(null);
@@ -138,6 +139,9 @@ export default function RoomPage({params}: {params: Promise<never>}) {
 
     return (
         <Layout>
+            <Head>
+                <title>Silent Sort - Room {roomId}</title>
+            </Head>
             <main className="min-h-screen p-4 sm:p-6 md:p-8">
                 <Container maxWidth="lg">
                     <Paper elevation={3}
@@ -145,7 +149,7 @@ export default function RoomPage({params}: {params: Promise<never>}) {
                         <Box className="flex flex-col sm:flex-row justify-between items-center gap-4">
                             <Typography variant="h4" component="h1"
                                         className="font-bold text-gray-800 dark:text-gray-100 flex items-center">
-                                <Image src="/icon.png" width={40} height={0} alt="Silent sort game icon" className="mr-3"/>
+                                <Image src={`${router.basePath}/icon.png`} width={40} height={0} alt="Silent sort game icon" className="mr-3"/>
                                 Silent Sort
                             </Typography>
                             <Box className="flex flex-wrap justify-center items-center gap-4 max-w-full">
