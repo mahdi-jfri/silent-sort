@@ -36,7 +36,7 @@ export default function HomePage() {
             alert("Please enter a player name.");
             return;
         }
-        router.push(`/room/${targetRoomId}`);
+        router.push({pathname: "/room/", query: {room: targetRoomId}});
     };
 
     const createAndJoinRoom = () => {

@@ -42,7 +42,7 @@ interface SnackbarData {
 
 export default function RoomPage() {
     const router = useRouter();
-    const roomId = router.query.roomId;
+    const roomId = router.query.room;
     const [name, setName] = useState<string>();
 
     const [gameData, setGameData] = useState<GameData | null>(null);
