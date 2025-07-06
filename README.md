@@ -7,6 +7,14 @@
 ![Screenshot of the Silent Sort game in action](https://raw.githubusercontent.com/mahdi-jfri/silent-sort/refs/heads/master/public/game-screenshot.png)
 
 ---
+## Game Rules
+
+- Each player is dealt one card when the game starts.
+- Each card has a unique number on it from 1 to 100.
+- The player with minimum number on their card must play it before anyone else. If someone else plays their card, everyone loses.
+- If all cards are played in order of their number, everyone wins!
+
+---
 
 ### ## Key Features
 
