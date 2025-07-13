@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
 import {Container, Grid, Paper, Typography, Box, CircularProgress, Chip, Snackbar, Alert} from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ShareIcon from '@mui/icons-material/Share';
@@ -14,6 +14,7 @@ import {AlertColor} from "@mui/material/Alert";
 import Image from "next/image";
 import {useRouter} from "next/router";
 import Head from "next/head";
+import {storageKeys} from "@/constants";
 
 interface Notification {
     show: boolean;
@@ -60,7 +61,7 @@ export default function RoomPage() {
     useEffect(() => {
         if (!roomId) return;
 
-        const localStorageName = localStorage.getItem('silentSortPlayerName') || generateTechName();
+        const localStorageName = localStorage.getItem(storageKeys.playerName) || generateTechName();
         setName(localStorageName);
 
         const wsUrl = `${process.env.NEXT_PUBLIC_BACKEND_WS_URL}/?room_id=${roomId}&name=${localStorageName}`;
@@ -113,8 +114,13 @@ export default function RoomPage() {
     const handlePlayCard = (cardId: string) => sendMessage(3, {card_id: cardId});
     const handleRestartGame = () => sendMessage(4);
 
-    const copyLinkToClipboard = () => {
-        const currentUrl = window.location.href;
+    const copyLinkToClipboard = useCallback(() => {
+        let basePath: string;
+        if (router.basePath)
+            basePath = `${window.location.origin}/${router.basePath}`;
+        else
+            basePath = window.location.origin;
+        const currentUrl = `${basePath}/join?room=${roomId}`;
 
         navigator.clipboard.writeText(currentUrl)
             .then(() => {
@@ -124,7 +130,7 @@ export default function RoomPage() {
                 console.error("Failed to copy link: ", err);
                 setSnackbar({open: true, message: 'Failed to copy link.', severity: 'error'});
             });
-    };
+    }, [router, roomId]);
 
     if (isLoading) {
         return (
