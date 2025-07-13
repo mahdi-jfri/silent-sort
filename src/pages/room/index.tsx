@@ -15,6 +15,7 @@ import Image from "next/image";
 import {useRouter} from "next/router";
 import Head from "next/head";
 import {storageKeys} from "@/constants";
+import urlJoin from "url-join";
 
 interface Notification {
     show: boolean;
@@ -117,10 +118,10 @@ export default function RoomPage() {
     const copyLinkToClipboard = useCallback(() => {
         let basePath: string;
         if (router.basePath)
-            basePath = `${window.location.origin}/${router.basePath}`;
+            basePath = urlJoin(window.location.origin, router.basePath);
         else
             basePath = window.location.origin;
-        const currentUrl = `${basePath}/join?room=${roomId}`;
+        const currentUrl = urlJoin(basePath, `/join?room=${roomId}`);
 
         navigator.clipboard.writeText(currentUrl)
             .then(() => {
