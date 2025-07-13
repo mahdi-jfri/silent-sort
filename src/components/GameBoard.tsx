@@ -27,6 +27,12 @@ const GameBoard = ({
     const renderGameStateMessage = (): React.ReactNode => {
         switch (gameState) {
             case GameState.LOBBY:
+                if (isOwner)
+                    return (
+                        <Typography variant="h6" className="text-gray-500 dark:text-gray-400">
+                            Others are waiting for you to start the game...
+                        </Typography>
+                    );
                 return <Typography variant="h6" className="text-gray-500 dark:text-gray-400">Waiting for the owner to
                     start the game...</Typography>;
             case GameState.WON:
