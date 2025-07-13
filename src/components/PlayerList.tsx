@@ -57,13 +57,15 @@ const PlayerList = ({players, selfId, cards}: PlayerListProps) => {
                             primary={player.name}
                             secondary={getPlayerTitle(player)}
                         />
-                        <div className="overflow-x-scroll flex flex-row w-1/4 md:w-1/2">
-                            {cards.filter(card => card.holder == player.id).sort(
-                                (a, b) => a.number - b.number
-                            ).map((card, index) =>
-                                <CardComponent key={index} number={card.number} small isPlayed/>
-                            )}
-                        </div>
+                        {cards.some(card => card.holder == player.id) &&
+                            <div className="overflow-x-scroll flex flex-row w-1/4 md:w-1/2 ml-auto">
+                                {cards.filter(card => card.holder == player.id).sort(
+                                    (a, b) => a.number - b.number
+                                ).map((card, index) =>
+                                    <CardComponent key={index} number={card.number} small isPlayed/>
+                                )}
+                            </div>
+                        }
                     </ListItem>
                 ))}
             </List>
