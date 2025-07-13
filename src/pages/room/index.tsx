@@ -104,16 +104,16 @@ export default function RoomPage() {
         };
     }, [roomId]);
 
-    const sendMessage = (type: number, payload: object = {}) => {
+    const sendMessage = async (type: number, payload: object = {}) => {
         if (ws.current?.readyState === WebSocket.OPEN) {
             const message = JSON.stringify({type, data: payload});
-            ws.current.send(message);
+            return ws.current.send(message);
         }
     };
 
     const handleStartGame = () => sendMessage(2);
     const handlePlayCard = (cardId: string) => sendMessage(3, {card_id: cardId});
-    const handleRestartGame = () => sendMessage(4);
+    const handleRestartGame = () => sendMessage(4).then(() => handleStartGame());
 
     const copyLinkToClipboard = useCallback(() => {
         let basePath: string;
