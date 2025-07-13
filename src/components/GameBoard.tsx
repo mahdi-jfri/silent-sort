@@ -98,7 +98,9 @@ const GameBoard = ({
                         Hand</Typography>
                     <Box className="flex flex-wrap justify-center items-center gap-4">
                         {playerCards.length > 0 ? (
-                            playerCards.map(card => (
+                            playerCards.sort(
+                                (a, b) => a.number - b.number
+                            ).map(card => (
                                 <Card
                                     key={card.id}
                                     number={card.number}
